@@ -1,0 +1,8 @@
+[user]
+	email = w1l7dev@gmail.com
+	name = W1L7dev
+[core]
+	editor = nvim
+[init]
+	defaultBranch = main
+	templatedir = ~/.git-template
