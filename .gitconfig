@@ -1,0 +1,27 @@
+[user]
+	name = W1L7dev
+    email = williammiclette@icloud.com
+
+[core]
+	editor = nvim
+	pager = delta
+[init]
+   defaultBranch = master
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	side-by-side = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
