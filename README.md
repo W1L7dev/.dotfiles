@@ -9,7 +9,7 @@ Here's a link to the `stow` website: [https://www.gnu.org/software/stow/](https:
 ## Installation
 
 ```bash
-git clone https://github.com/W1L7dev/.dotfiles.git $HOME
+git clone https://github.com/W1L7dev/.dotfiles.git $HOME/.dotfiles
 cd ~/.dotfiles
 stow .
 ```
