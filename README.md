@@ -6,6 +6,18 @@ I recommend installing `stow`, as it's an easy way of managing dotfiles.
 
 Here's a link to the `stow` website: [https://www.gnu.org/software/stow/](https://www.gnu.org/software/stow/)
 
+## Requirements
+
+- git
+- tmux
+- zsh
+- neovim
+- dust
+- neofetch
+- btop
+- bat
+- alacritty
+
 ## Installation
 
 ```bash

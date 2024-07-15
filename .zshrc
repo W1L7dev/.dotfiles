@@ -29,6 +29,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
+zinit light zdharma-continuum/fast-syntax-highlighting
 
 # ---- SNIPPETS ----
 zinit snippet OMZP::git
@@ -69,6 +70,10 @@ eval "$(zoxide init --cmd cd zsh)"
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_COMMAND="fd --type=d --hidden --strip-cwd-prefic --exclude .git"
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
 _fzf_compgen_path() {
     fd --hidden --exclude .git . "$1"
@@ -97,9 +102,6 @@ _fzf_comprun() {
   esac
 }
 
-# ---- BAT ----
-export BAT_THEME=TwoDark
-
 # ---- ALIASES ----
 alias tree="eza --icons --color --recurse --tree --all --git-ignore --level=2"
 alias ls="eza --color --long --git --no-filesize --icons --no-time --no-user --no-permissions"
@@ -116,3 +118,7 @@ eval $(thefuck --alias)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
