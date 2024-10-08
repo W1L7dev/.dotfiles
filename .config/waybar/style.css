@@ -62,7 +62,7 @@ window#waybar.hidden {
   color: #181825;
 }
 
-#custom-logo1, #custom-logo2 {
+#custom-logo1 {
   padding-right: 7px;
   padding-left: 7px;
   margin-left: 5px;

@@ -112,12 +112,6 @@ alias py="python3"
 alias pip="pip3"
 alias neofetch="neofetch --ascii ~/.dotfiles/.config/neofetch/arch"
 
-# ---- BUN ----
-[ -s "/home/will/.bun/_bun" ] && source "/home/will/.bun/_bun"
-
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
 # ---- BAT ----
 bat cache --build
 clear
