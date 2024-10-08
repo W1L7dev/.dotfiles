@@ -3,13 +3,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# ---- TMUX ----
 if [ -z "$TMUX" ]; then
   exec tmux new-session -A -s workspace
 fi
-
-# ---- PATH ----
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-export PATH="/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH"
 
 # ---- ZINIT ----
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -36,6 +33,11 @@ zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::fzf
+zinit snippet OMZP::kitty
+zinit snippet OMZP::tmux
+zinit snippet OMZP::vscode
+zinit snippet OMZP::zoxide
 
 # ---- KEYBINDINGS ----
 bindkey "^f" autosuggest-accept
@@ -83,42 +85,48 @@ _fzf_compgen_dir() {
     fd --type=d --hidden --exclude .git . "$1"
 }
 
-source ~/fzf-git.sh/fzf-git.sh
+source ~/Repos/fzf-git/fzf-git.sh
 
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
-export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+export FZF_CTRL_T_OPTS="--preview \"$show_file_or_dir_preview\""
+export FZF_ALT_C_OPTS="--preview \"eza --tree --color=always {} | head -200\""
 
 _fzf_comprun() {
   local command=$1
   shift
 
   case "$command" in
-    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
-    export|unset) fzf --preview "eval 'echo \${}'"         "$@" ;;
-    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    cd)           fzf --preview "eza --tree --color=always {} | head -200" "$@" ;;
+    export|unset) fzf --preview "eval \"echo \${}\""         "$@" ;;
+    ssh)          fzf --preview "dig {}"                   "$@" ;;
     *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
   esac
 }
 
 # ---- ALIASES ----
 alias tree="eza --icons --color --recurse --tree --all --git-ignore --level=2"
-alias ls="eza --color --long --git --no-filesize --icons --no-time --no-user --no-permissions"
+alias ls="eza --color --long --git --no-filesize --icons --no-time --no-user --no-permissions --all"
 alias cls="clear"
 alias py="python3"
 alias pip="pip3"
+alias neofetch="neofetch --ascii ~/.dotfiles/.config/neofetch/arch"
+
+# ---- BUN ----
+[ -s "/home/will/.bun/_bun" ] && source "/home/will/.bun/_bun"
+
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# ---- BAT ----
+bat cache --build
+clear
 
 # ---- THEFUCK ----
 eval $(thefuck --alias)
 
 # ---- STARTUP ----
+neofetch --ascii_colors 4 --ascii ~/.dotfiles/.config/neofetch/arch
+
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-cd ~/color-scripts/color-scripts
-
-RANDOM_FILE=$(ls . | shuf -n 1)
-echo $RANDOM_FILE\n
-./"${RANDOM_FILE:3}"
-
 cd ~
