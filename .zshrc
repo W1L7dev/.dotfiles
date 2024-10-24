@@ -5,7 +5,7 @@ fi
 
 # ---- TMUX ----
 if [ -z "$TMUX" ]; then
-  exec tmux new-session -A -s workspace
+  exec tmux new-session
 fi
 
 # ---- ZINIT ----
@@ -114,13 +114,13 @@ alias neofetch="neofetch --ascii ~/.dotfiles/.config/neofetch/arch"
 
 # ---- BAT ----
 bat cache --build
-clear
 
 # ---- THEFUCK ----
 eval $(thefuck --alias)
 
 # ---- STARTUP ----
-neofetch --ascii_colors 4 --ascii ~/.dotfiles/.config/neofetch/arch
+clear
+fastfetch
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 cd ~
