@@ -120,7 +120,7 @@ eval $(thefuck --alias)
 
 # ---- STARTUP ----
 clear
-fastfetch
+neofetch
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 cd ~
